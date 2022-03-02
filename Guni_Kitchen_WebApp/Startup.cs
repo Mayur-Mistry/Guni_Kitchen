@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Guni_Kitchen_WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,31 @@ namespace Guni_Kitchen_WebApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            /* services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<ApplicationDbContext>();*/
+            services.AddIdentity<MyIdentityUser, MyIdentityRole>(option =>
+            {
+                option.SignIn.RequireConfirmedAccount = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireDigit = true;
+                option.Password.RequireNonAlphanumeric = true;
+                option.Password.RequiredLength = 8;
+
+                option.User.RequireUniqueEmail= true;
+
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath ="/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenide";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.SlidingExpiration = true;
+
+            });
             services.AddRazorPages();
         }
 
@@ -63,7 +87,7 @@ namespace Guni_Kitchen_WebApp
             {
                 endpoints.MapControllerRoute(
                    name: "areas",
-                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                   pattern: "{area:exists}/{controller}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
