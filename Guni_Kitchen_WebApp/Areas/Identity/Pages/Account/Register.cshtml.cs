@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Guni_Kitchen_WebApp.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
 {
@@ -21,7 +22,7 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<MyIdentityUser> _signInManager;
-        private readonly UserManager<MyIdentityUser> _userManager;
+        public readonly UserManager<MyIdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
@@ -61,6 +62,26 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Display Name")]
+            [Required(ErrorMessage = "{0} cannot be empty.")]
+            [MinLength(2, ErrorMessage = "{0} should have at least {1} characters.")]
+            [StringLength(60, ErrorMessage = "{0} cannot have more than {1} characters.")]
+            public string DisplayName { get; set; }
+
+
+
+            [Display(Name = "Date of Birth")]
+            [Required]
+            public DateTime DateOfBirth { get; set; }
+          
+            [Display(Name = "Gender")]
+            [Required]
+            public Gender Genders { get; set; }
+
+            [Display(Name = "Is Admin User?")]
+            [Required]
+            public bool IsAdminUser { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +96,20 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new MyIdentityUser { UserName = Input.Email, Email = Input.Email };
+             /*   MyIdentityUser user = new MyIdentityUser();
+                if(user.Genders == 0)
+                {
+                    user.Genders = 0;
+                }else if(user.Genders == 1)
+*/
+                var user = new MyIdentityUser { 
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    DisplayName = Input.DisplayName,
+                    DateOfBirth = Input.DateOfBirth, 
+                    Genders=Input.Genders,
+                    IsAdminUser = Input.IsAdminUser
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

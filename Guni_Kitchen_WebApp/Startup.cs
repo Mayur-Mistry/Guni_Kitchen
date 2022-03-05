@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Guni_Kitchen_WebApp.Services;
 
 namespace Guni_Kitchen_WebApp
 {
@@ -34,20 +36,21 @@ namespace Guni_Kitchen_WebApp
             services.AddDatabaseDeveloperPageExceptionFilter();
             /* services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddEntityFrameworkStores<ApplicationDbContext>();*/
-            services.AddIdentity<MyIdentityUser, MyIdentityRole>(option =>
+            services.AddIdentity<MyIdentityUser, MyIdentityRole>(options =>
             {
-                option.SignIn.RequireConfirmedAccount = true;
-                option.Password.RequireUppercase = true;
-                option.Password.RequireLowercase = true;
-                option.Password.RequireDigit = true;
-                option.Password.RequireNonAlphanumeric = true;
-                option.Password.RequiredLength = 8;
+                //options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 8;
 
-                option.User.RequireUniqueEmail= true;
+                options.User.RequireUniqueEmail= true;
 
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath ="/Identity/Account/Login";
@@ -58,6 +61,8 @@ namespace Guni_Kitchen_WebApp
 
             });
             services.AddRazorPages();
+            services.
+                AddSingleton<IEmailSender, MyEmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,5 +14,8 @@ namespace Guni_Kitchen_WebApp.Data
             : base(options)
         {
         }
+        public DbSet<Guni_Kitchen_WebApp.Models.Category> Category { get; set; }
+        public DbSet<Guni_Kitchen_WebApp.Models.Order> Order { get; set; }
+        public DbSet<Guni_Kitchen_WebApp.Models.Product> Product { get; set; }
     }
 }

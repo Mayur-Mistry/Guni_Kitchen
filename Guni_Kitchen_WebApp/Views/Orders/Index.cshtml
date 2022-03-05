@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Guni_Kitchen_WebApp.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Modes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Modes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.Product_Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Order_Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Order_Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Order_Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
