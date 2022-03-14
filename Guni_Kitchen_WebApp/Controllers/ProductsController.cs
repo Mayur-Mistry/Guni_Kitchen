@@ -14,6 +14,7 @@ namespace Guni_Kitchen_WebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;
@@ -22,6 +23,7 @@ namespace Guni_Kitchen_WebApp.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+
             var applicationDbContext = _context.Product.Include(p => p.Category);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -57,10 +59,22 @@ namespace Guni_Kitchen_WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Product_Id,Product_Name,Product_Price,Product_image,Product_Size,Product_Description,CategoryId")] Product product)
+        public async Task<IActionResult> Create
+            ([Bind("Product_Id,Product_Name,Product_Price,Product_image,Size,UnitOfMeasure,Product_Description,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
+                Product newProduct = new Product
+                {
+                    Product_Id = product.Product_Id,
+                    Product_Name = product.Product_Name,
+                    Product_Description = product.Product_Description,
+                    Product_Price = product.Product_Price,
+                    UnitOfMeasure = product.UnitOfMeasure,
+                    Size = product.Size,
+                    CategoryId = product.CategoryId,
+                    Product_image=product.Product_image
+                };
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +105,7 @@ namespace Guni_Kitchen_WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Product_Id,Product_Name,Product_Price,Product_image,Product_Size,Product_Description,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Product_Id,Product_Name,UnitOfMeasure,Product_Price,Product_image,Size,Product_Description,CategoryId")] Product product)
         {
             if (id != product.Product_Id)
             {

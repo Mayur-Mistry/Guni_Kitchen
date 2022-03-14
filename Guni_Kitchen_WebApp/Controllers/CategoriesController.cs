@@ -58,6 +58,13 @@ namespace Guni_Kitchen_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool found = _context.Category.Any(e => e.Category_Name == category.Category_Name);
+                if (found)
+                {
+                    ModelState.AddModelError("CategoryName", "Duplicate Category Found!");
+                    return View(category);
+                }
+
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -95,6 +102,14 @@ namespace Guni_Kitchen_WebApp.Controllers
 
             if (ModelState.IsValid)
             {
+                bool found = _context.Category.Any(e =>
+                   e.Category_Id != category.Category_Id && e.Category_Name == category.Category_Name);
+                if (found)
+                {
+                    ModelState.AddModelError("CategoryName", "Duplicate Category Found!");
+                    return View(category);
+                }
+
                 try
                 {
                     _context.Update(category);

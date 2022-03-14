@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="container">
 
 <h1>Edit</h1>
 
@@ -29,9 +30,14 @@
                 <span asp-validation-for="Product_image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product_Size" class="control-label"></label>
-                <input asp-for="Product_Size" class="form-control" />
-                <span asp-validation-for="Product_Size" class="text-danger"></span>
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="UnitOfMeasure" class="control-label"></label>
+                <input asp-for="UnitOfMeasure" class="form-control" />
+                <span asp-validation-for="UnitOfMeasure" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product_Description" class="control-label"></label>
@@ -53,7 +59,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

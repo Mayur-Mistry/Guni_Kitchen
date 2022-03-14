@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,11 +20,9 @@ namespace Guni_Kitchen_WebApp.Models
         public string Category_Name { get; set; }
 
 
-        [Required]
-        [StringLength(200)]
-        [Column(TypeName = "varchar")]
-        [Display(Name = "Image")]
-        public string Category_image { get; set; }
+        [Display(Name ="Created at")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedAt { get; set; }
 
         #region Navigational Properties => Product Model
 

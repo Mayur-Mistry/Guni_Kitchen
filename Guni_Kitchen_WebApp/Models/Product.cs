@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Guni_Kitchen_WebApp.Models.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,17 +13,22 @@ namespace Guni_Kitchen_WebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Product_Id { get; set; }
 
+        [Display(Name = "Name of the Product")]
         [Required]
-        [StringLength(100)]
-        [Column(TypeName = "varchar")]
-        [Display(Name = "Product Name")]
+        [StringLength(80, ErrorMessage = "{0} cannot have more than {1} characters.")]
+        [MinLength(3, ErrorMessage = "{0} should have a minimum of {1} characters.")]
         public string Product_Name { get; set; }
 
+        [Display(Name = "Price per unit")]
         [Required]
-        [DataType(DataType.Currency)]
-        [Display(Name = "Product Price")]
+        [Range(0.0, 500.00, ErrorMessage = "{0} has to be between Rs. {1} and Rs. {2}")]
+        public decimal Product_Price { get; set; }
 
-        public int Product_Price { get; set; }
+
+        [Required]
+        [Display(Name = "Unit of Measure")]
+        public string UnitOfMeasure { get; set; }
+
 
         [Required]
         [StringLength(200)]
@@ -30,18 +36,12 @@ namespace Guni_Kitchen_WebApp.Models
         [Display(Name = "Product Image")]
         public string Product_image { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        [Column(TypeName = "varchar")]
         [Display(Name = "Size")]
-        public string Product_Size{ get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public ProductSize Size { get; set; }
 
-
-        [Required]
-        [StringLength(500,MinimumLength = 5)]
-        [Column(TypeName = "varchar")]
         [Display(Name = "Description")]
-        [DataType(DataType.MultilineText)]
+
         public string Product_Description { get; set; }
 
 

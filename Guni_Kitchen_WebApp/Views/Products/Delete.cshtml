@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="container">
+
 
 <h1>Delete</h1>
 
@@ -30,10 +32,10 @@
             @Html.DisplayFor(model => model.Product_image)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Product_Size)
+            @Html.DisplayNameFor(model => model.Size)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Product_Size)
+            @Html.DisplayFor(model => model.Size)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Product_Description)
@@ -54,4 +56,6 @@
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
+</div>
+
 </div>
