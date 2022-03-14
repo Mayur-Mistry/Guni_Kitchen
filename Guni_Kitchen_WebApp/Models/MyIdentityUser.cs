@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Guni_Kitchen_WebApp.Models.Enums.MyIdentityGenders;
 
 namespace Guni_Kitchen_WebApp.Models
 {
@@ -29,6 +30,7 @@ namespace Guni_Kitchen_WebApp.Models
 
         [Display(Name = "Gender")]
         [Required]
+        [PersonalData]
         public Gender Genders { get; set; }
 
         [Display(Name = "Is Admin User?")]
@@ -42,20 +44,11 @@ namespace Guni_Kitchen_WebApp.Models
         #endregion::
     }
 }
-public enum Gender
-{
-    [Display(Name = "Male")]
-    Male,
-    [Display(Name = "Female")]
-    Female,
-    [Display(Name = "Other")]
-    Other
-}
+
 
 public class AgeValidationAttribute : ValidationAttribute
 {
-    protected override ValidationResult IsValid(object value, ValidationContext
-context)
+    protected override ValidationResult IsValid(object value, ValidationContext context)
     {
         int givenAge = int.Parse(value.ToString());
         if (givenAge < 18)

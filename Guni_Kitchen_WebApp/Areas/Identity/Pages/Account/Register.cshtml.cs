@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Guni_Kitchen_WebApp.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Guni_Kitchen_WebApp.Models.Enums.MyIdentityGenders;
 
 namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
 {
@@ -76,7 +77,7 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
             public DateTime DateOfBirth { get; set; }
           
             [Display(Name = "Gender")]
-            [Required]
+            [Required(ErrorMessage ="Please indicate which of these best describes your Gender")]
             public Gender Genders { get; set; }
 
             [Display(Name = "Is Admin User?")]

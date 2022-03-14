@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Guni_Kitchen_WebApp.Models;
+using static Guni_Kitchen_WebApp.Models.Enums.MyIdentityGenders;
+using Guni_Kitchen_WebApp.Data;
 
 namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account.Manage
 {
@@ -14,6 +16,8 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<MyIdentityUser> _userManager;
         private readonly SignInManager<MyIdentityUser> _signInManager;
+
+        private readonly ApplicationDbContext _dbcontext;
 
         public IndexModel(
             UserManager<MyIdentityUser> userManager,
@@ -31,6 +35,22 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [Display(Name = "Gender")]
+        [Required(ErrorMessage = "Please indicate which of these best describes your Gender")]
+
+        public Gender Genders { get; set; }
+
+
+        [Display(Name = "Is Admin User?")]
+        [Required]
+        public bool IsAdminUser { get; set; }
+
+
+        [Display(Name = "Date of Birth")]
+        [Required]
+        public DateTime DateOfBirth { get; set; }
+
+
         public class InputModel
         {
             [Phone]
@@ -42,6 +62,7 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
 
             Username = userName;
 

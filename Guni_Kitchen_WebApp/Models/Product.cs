@@ -60,9 +60,5 @@ namespace Guni_Kitchen_WebApp.Models
 
         #endregion::
 
-
-
-
-
     }
 }

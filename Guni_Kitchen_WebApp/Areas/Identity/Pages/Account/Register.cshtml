@@ -1,12 +1,39 @@
 ﻿@page
+@using Guni_Kitchen_WebApp.Models.Enums
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
 
+    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+<div class="container">
 <h1>@ViewData["Title"]</h1>
 
-<div class="row">
+    <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -33,24 +60,48 @@
                 <input asp-for="Input.DisplayName" class="form-control" />
                 <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
             </div>
+            
              <div class="form-group">
-                <label asp-for="Input.Genders" ></label>
+                 <label asp-for="Input.Genders" class="control-label-required"></label>
+                 <br />
+                 
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <lable class="btn btn-secondary">
+                        <input asp-for="Input.Genders" type= "radio" class="form-check input" id="input.Genders.Male" name="Input.Genders" value="@MyIdentityGenders.Gender.Male" />
+                    Male   
+                    </lable>
+
+                       <lable class="btn btn-secondary">
+                        <input asp-for="Input.Genders" type= "radio" class="form-check input" id="input.Genders.Female" name="Input.Genders" value="@MyIdentityGenders.Gender.Female" />
+                    Female   
+                    </lable>
+
+                       <lable class="btn btn-secondary">
+                        <input asp-for="Input.Genders" type= "radio" class="form-check input" id="input.Genders.Other" name="Input.Genders" value="@MyIdentityGenders.Gender.Other" />
+                    Other   
+                    </lable>
+
+ </div>
+
+               @* <label asp-for="Input.Genders" ></label><br />
                 <input type="radio" name="Genders" id="Male" value="0" /> Male 
                 <input type="radio" name="Genders" id="Female" value="1" /> Female 
                 <input type="radio" name="Genders" id="Other" value="2" /> Other 
-                
-                  
-               @* <input asp-for="Input.Genders" class="form-control" />*@
-                <span asp-validation-for="Input.Genders" class="text-danger"></span>
+                                 
+                <input asp-for="Input.Genders" class="form-control" />
+                <span asp-validation-for="Input.Genders" class="text-danger"></span>*@
+
             </div> 
+
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth"></label>
                 <input asp-for="Input.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div> 
             <div class="form-group">
+                <input asp-for="Input.IsAdminUser"  />
                 <label asp-for="Input.IsAdminUser"></label>
-                <input asp-for="Input.IsAdminUser" class="form-control" />
+                
                 <span asp-validation-for="Input.IsAdminUser" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
@@ -87,7 +138,11 @@
         </section>
     </div>
 </div>
+</div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+   
 }
