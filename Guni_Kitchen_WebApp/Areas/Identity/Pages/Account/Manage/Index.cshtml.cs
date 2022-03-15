@@ -17,8 +17,8 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<MyIdentityUser> _userManager;
         private readonly SignInManager<MyIdentityUser> _signInManager;
 
-        private readonly ApplicationDbContext _dbcontext;
-
+/*        private readonly ApplicationDbContext _dbcontext;
+*/
         public IndexModel(
             UserManager<MyIdentityUser> userManager,
             SignInManager<MyIdentityUser> signInManager)

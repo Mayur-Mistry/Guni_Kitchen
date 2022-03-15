@@ -1,12 +1,13 @@
-﻿using Guni_Kitchen_WebApp.Models.Enums;
+﻿using Guni_Kitchen_WebApp.Models;
+using Guni_Kitchen_WebApp.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Guni_Kitchen_WebApp.Models
+namespace Guni_Kitchen_WebApp.ViewModels
 {
-    [Table("Products")]
-    public class Product
+    public class ProductViewModel
     {
         [Key]
         [Display(Name = "Product ID")]
@@ -43,12 +44,14 @@ namespace Guni_Kitchen_WebApp.Models
         [Display(Name = "Description")]
 
         public string Product_Description { get; set; }
+        [Display(Name ="Product Image")]
+        public IFormFile Photo{ get; set; }
 
         [StringLength(150)]
         public string ProductImageFileUrl { get; set; }
 
         [StringLength(60)]
-        public string ProductImageContentType { get; set; }
+        public string ProductImageType { get; set; }
 
 
 

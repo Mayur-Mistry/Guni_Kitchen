@@ -22,8 +22,8 @@ namespace Guni_Kitchen_WebApp.Areas.Identity.Pages.Account
         private readonly UserManager<MyIdentityUser> _userManager;
         private readonly SignInManager<MyIdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly ApplicationDbContext _dbcon;
-
+/*        private readonly ApplicationDbContext _dbcon;
+*/
 
         public LoginModel(SignInManager<MyIdentityUser> signInManager, 
             ILogger<LoginModel> logger,
